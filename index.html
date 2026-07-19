@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COLPLANT Pathology & Vertebrate Research Hub</title>
-<!-- Put this in your HTML file to load Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap');
   
@@ -181,9 +179,8 @@
 
       <div class="hub-card">
         <h3>👥 2026/2027 Research Cohort (12 Students)</h3>
-        <!-- Dynamic Target List Component Container -->
         <ul class="student-list" id="sidebar-cohort-list-mount">
-          <!-- Populated securely via JavaScript dynamic engine -->
+          <!-- Populated dynamic list -->
         </ul>
         <p style="font-size:10px; color:#888; margin: 8px 0 0 0; text-align: right; font-style: italic;">
           *informations will be updated as soon as possible
@@ -265,21 +262,11 @@
 
 <script>
   // ================================================================= -->
-  // 🔌 CLOUD DATABASE PERSISTENCE CONFIGURATION ENGINE (SUPABASE)
+  // 🔌 CLOUD SETUP REMOVED - RUNNING PURELY ON LOCALSTORAGE RESET
   // ================================================================= -->
-  const SUPABASE_URL = "https://whbgnrqhrsqopxhorlkn.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_2Tcu846tbkOcyB3yYcVWcA_WkBzbnxy";
-  
-  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   let activePrefixKeyContext = "";
   let AUDIT_TARGET_STUDENT = null;
 
-  // ================================================================= -->
-  // 👥 COHORT SECURE REGISTRY DIRECTORY & ALLOCATED METADATA SLOTS
-  // ================================================================= -->
-  // ================================================================= -->
-  // 👥 COHORT SECURE REGISTRY DIRECTORY & ALLOCATED METADATA SLOTS
-  // ================================================================= -->
   const COHORT_REGISTRY = {
     "20224193": { 
       name: "O. E. Josiah", 
@@ -315,7 +302,7 @@
       prefix: "ezekiel_", 
       treatments: "Mycology (V2: T1, T2, T3)",
       plots: ["110", "203", "301", "109", "214", "305", "107", "212", "304"],
-      labels: ["T1 Control (110)", "T1 Control (203)", "T1 Control (301)", "T2 OF 2.5 ton/hectare (109)", "T2 OF (214)", "T2 OF (305)", "T3 OF (107)", "T3 OF (212)", "T3 OF (304)"],
+      labels: ["T1 Control (110)", "T1 Control (203)", "T1 Control (301)", "T2 OF 2.5 ton/hectare (109)", "T2 OF (214)", "T2 OF (305)", "T3 OF (107)", "T3 OF (212)", "T3 OF (304)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T2)",
       group3_title: "Experimental Group III: Organic Foliar Formulation (T3)",
       plot_codes: [
@@ -343,7 +330,7 @@
       prefix: "success_", 
       treatments: "Mycology (V1: T1, T2, T4)",
       plots: ["104", "209", "313", "105", "207", "312", "103", "206", "314"],
-      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T2 (105)", "T2 (207)", "T2 (312)", "T4 (103)", "T4 (206)", "T4 (314)"],
+      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T2 (105)", "T2 (207)", "T2 (312)", "T4 (103)", "T4 (206)", "T4 (314)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T2)",
       group3_title: "Experimental Group III: Foliar Fertilizer Standard Double Strength (T4)",
       plot_codes: [
@@ -371,7 +358,7 @@
       prefix: "jerry_", 
       treatments: "Mycology (V2: T1, T3, T5)",
       plots: ["110", "211", "301", "107", "212", "304", "106", "213", "302"],
-      labels: ["T1 Control (110)", "T1 Control (211)", "T1 Control (301)", "T3 (107)", "T3 (212)", "T3 (304)", "T5 (106)", "T5 (213)", "T5 (302)"],
+      labels: ["T1 Control (110)", "T1 Control (211)", "T1 Control (301)", "T3 (107)", "T3 (212)", "T3 (304)", "T5 (106)", "T5 (213)", "T5 (302)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T3)",
       group3_title: "Experimental Group III: Foliar Fertilizer Maximized Triple Strength (T5)",
       plot_codes: [
@@ -399,7 +386,7 @@
       prefix: "esther_", 
       treatments: "Mycology (V2: T1, T4, T5)",
       plots: ["110", "211", "301", "108", "215", "303", "106", "213", "302"],
-      labels: ["T1 Control (110)", "T1 Control (211)", "T1 Control (301)", "T4 (108)", "T4 (215)", "T4 (303)", "T5 (106)", "T5 (213)", "T5 (302)"],
+      labels: ["T1 Control (110)", "T1 Control (211)", "T1 Control (301)", "T4 (108)", "T4 (215)", "T4 (303)", "T5 (106)", "T5 (213)", "T5 (302)"],
       group2_title: "Experimental Group II: Foliar Fertilizer Standard Double Strength (T4)",
       group3_title: "Experimental Group III: Foliar Fertilizer Maximized Triple Strength (T5)",
       plot_codes: [
@@ -427,7 +414,7 @@
       prefix: "malik_", 
       treatments: "Mycology (V1: T1, T4, T5)",
       plots: ["104", "209", "313", "103", "206", "314", "102", "210", "311"],
-      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T4 (103)", "T4 (206)", "T4 (314)", "T5 (102)", "T5 (210)", "T5 (311)"],
+      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T4 (103)", "T4 (206)", "T4 (314)", "T5 (102)", "T5 (210)", "T5 (311)"],
       group2_title: "Experimental Group II: Foliar Fertilizer Standard Double Strength (T4)",
       group3_title: "Experimental Group III: Foliar Fertilizer Maximized Triple Strength (T5)",
       plot_codes: [
@@ -455,7 +442,7 @@
       prefix: "gbotemi_", 
       treatments: "Mycology (V1: T1, T2, T3)",
       plots: ["104", "209", "313", "105", "207", "312", "101", "208", "315"],
-      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T2 OF (105)", "T2 OF (207)", "T2 OF (312)", "T3 OF (101)", "T3 OF (208)", "T3 OF (315)"],
+      labels: ["T1 Control (104)", "T1 Control (209)", "T1 Control (313)", "T2 OF (105)", "T2 OF (207)", "T2 OF (312)", "T3 OF (101)", "T3 OF (208)", "T3 OF (315)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T2)",
       group3_title: "Experimental Group III: Organic Foliar Formulation (T3)",
       plot_codes: [
@@ -483,7 +470,7 @@
       prefix: "marvelous_", 
       treatments: "Mycology (V3: T1, T2, T3)",
       plots: ["111", "203", "309", "113", "201", "307", "115", "205", "308"],
-      labels: ["T1 Control (111)", "T1 Control (203)", "T1 Control (309)", "T2 OF (113)", "T2 OF (201)", "T2 OF (307)", "T3 OF (115)", "T3 OF (205)", "T3 OF (308)"],
+      labels: ["T1 Control (111)", "T1 Control (203)", "T1 Control (309)", "T2 OF (113)", "T2 OF (201)", "T2 OF (307)", "T3 OF (115)", "T3 OF (205)", "T3 OF (308)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T2)",
       group3_title: "Experimental Group III: Organic Foliar Formulation (T3)",
       plot_codes: [
@@ -511,7 +498,7 @@
       prefix: "ibrahim_", 
       treatments: "Mycology (V3: T1, T2, T4)",
       plots: ["111", "203", "307", "113", "201", "307", "114", "202", "310"],
-      labels: ["T1 Control (111)", "T1 Control (203)", "T1 Control (307)", "T2 OF (113)", "T2 OF (201)", "T2 OF (307)", "T4 FF (114)", "T4 FF (202)", "T4 FF (310)"],
+      labels: ["T1 Control (111)", "T1 Control (203)", "T1 Control (307)", "T2 OF (113)", "T2 OF (201)", "T2 OF (307)", "T4 FF (114)", "T4 FF (202)", "T4 FF (310)"],
       group2_title: "Experimental Group II: Organic Foliar Formulation (T2)",
       group3_title: "Experimental Group III: Foliar Fertilizer Standard Double Strength (T4)",
       plot_codes: [
@@ -538,7 +525,7 @@
       pass: "louis192", 
       prefix: "louis_", 
       treatments: "Mycology (Not Assigned!!)",
-      plots: ["141", "241", "341", "142", "242", "342", "143", "243", "343"], // Placeholder fallback matrix structure
+      plots: ["141", "241", "341", "142", "242", "342", "143", "243", "343"], 
       labels: ["Control (141)", "Control (241)", "Control (341)", "Pending (142)", "Pending (242)", "Pending (342)", "Pending (143)", "Pending (243)", "Pending (343)"],
       group2_title: "Vascular Specialist Profile Block Area A",
       group3_title: "Vascular Specialist Profile Block Area B",
@@ -621,7 +608,6 @@
 
   let LOGGED_IN_USER = null;
 
-  // INITIAL LOAD BOOTSTRAPPER
   function initializeMatrixDatabase() {
     let localDatabase = localStorage.getItem("castor_logger_data");
     if (!localDatabase) {
@@ -637,20 +623,18 @@
       localStorage.setItem("castor_logger_data", JSON.stringify(localDatabase));
     }
     
-    renderCohortSidebarDirectory(); // Draw list on load
+    renderCohortSidebarDirectory(); 
     renderAllWeeksHTML();
     bindInputListeners();
     loadSavedValuesToDOM();
   }
 
-  // DOUBLE-ACTION DIRECTORY RENDER LOOP
   function renderCohortSidebarDirectory() {
     const listMount = document.getElementById("sidebar-cohort-list-mount");
     if (!listMount) return;
     
     listMount.innerHTML = "";
     
-    // 👑 RE-CONFIGURED RIGHT TARGET BADGE CONTROLLER
     let isSupervisorMode = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "supervisor");
     let isJosiahExplorer = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "josiah_");
 
@@ -660,7 +644,6 @@
       const listItem = document.createElement("li");
       listItem.className = "student-item";
       
-      // Left Side Name Box Profile Card View Mode
       const leftProfileClickable = document.createElement("div");
       leftProfileClickable.className = "clickable-profile-zone";
       leftProfileClickable.innerHTML = `<strong>${studentData.name} (Matric: ${matricId})</strong>`;
@@ -668,14 +651,12 @@
         launchMetadataProfileModal(matricId);
       };
 
-      // Right Side Data badge router
       const rightBadgeClickable = document.createElement("div");
       rightBadgeClickable.className = "clickable-data-zone";
       
       let badgeStyleClass = studentData.treatments.includes("Vertebrate") ? "badge-vrt" : "badge-myc";
       rightBadgeClickable.innerHTML = `<span class="badge-label ${badgeStyleClass}">${studentData.treatments}</span>`;
       
-      // Allow BOTH the Supervisor AND Josiah Explorer Account to click open data logs rows
       if (isSupervisorMode || isJosiahExplorer) {
         rightBadgeClickable.style.cursor = "pointer";
         rightBadgeClickable.onclick = function() {
@@ -696,7 +677,6 @@
           bindInputListeners();
           loadSavedValuesToDOM();
           
-          // Make sure Josiah can slide back out to the explorer menu screen safely
           const backArrow = document.getElementById("back-navigation-arrow-id");
           if (backArrow) backArrow.style.display = "block";
           
@@ -713,7 +693,6 @@
     });
   }
 
-  // ℹ️ DYNAMIC REGISTRATION CARD POPUP ENGINE
   function launchMetadataProfileModal(matricId) {
     const s = COHORT_REGISTRY[matricId];
     if (!s) return;
@@ -728,36 +707,32 @@
           <div style="font-size:11px; text-align:center; font-weight:bold; color:#64748b; margin-bottom:12px;">
             2026/2027 Academic Session<br>Supervisor: Prof O.A. Enikuomehin
           </div>
-          
-          <!-- Affix Passport Layout Box -->
           <div class="passport-frame">
             <span>Affix Passport<br>Photograph Here</span>
           </div>
-          
           <table class="profile-table">
             <tr><td class="label-col">Full Name:</td><td>${s.name}</td></tr>
             <tr><td class="label-col">Matric No:</td><td>${matricId}</td></tr>
-            <tr><td class="label-col">Nickname:</td><td>${s.nickname || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">Email Address:</td><td>${s.email || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">Phone Number:</td><td>${s.phone || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">Hobby:</td><td>${s.hobby || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">Residential:</td><td>${s.address || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">State of Origin:</td><td>${s.state_of_origin || '[Click Edit next week]'}</td></tr>
-            <tr><td class="label-col">L.G.A:</td><td>${s.lga || '[Click Edit next week]'}</td></tr>
+            <tr><td class="label-col">Nickname:</td><td>${s.nickname || '[Pending]'}</td></tr>
+            <tr><td class="label-col">Email Address:</td><td>${s.email || '[Pending]'}</td></tr>
+            <tr><td class="label-col">Phone Number:</td><td>${s.phone || '[Pending]'}</td></tr>
+            <tr><td class="label-col">Hobby:</td><td>${s.hobby || '[Pending]'}</td></tr>
+            <tr><td class="label-col">Residential:</td><td>${s.address || '[Pending]'}</td></tr>
+            <tr><td class="label-col">State of Origin:</td><td>${s.state_of_origin || '[Pending]'}</td></tr>
+            <tr><td class="label-col">L.G.A:</td><td>${s.lga || '[Pending]'}</td></tr>
             <tr><td class="label-col">Date Logged:</td><td>${s.date_created}</td></tr>
           </table>
-          
           <button class="profile-modal-close-btn" onclick="this.closest('.profile-modal-overlay').remove()">Close Profile Document View</button>
         </div>
       </div>
     `;
     document.body.appendChild(overlay);
   }
-async function openPasswordCustomizationPanel(matricId) {
+
+  function openPasswordCustomizationPanel(matricId) {
     const s = COHORT_REGISTRY[matricId];
     if (!s) return;
     
-    // Safety check: A student cannot change someone else's credentials
     if (LOGGED_IN_USER.prefix !== "supervisor" && LOGGED_IN_USER.prefix !== s.prefix) {
       alert("Access Denied: You are not authorized to update credentials logs parameters for this candidate slot.");
       return;
@@ -781,68 +756,28 @@ async function openPasswordCustomizationPanel(matricId) {
       return;
     }
 
-    try {
-      // 🔒 SECURE INSTANT SYNC: Stream the credential update directly up to Supabase
-      const { error } = await _supabase
-        .from('cohort_credential_sync')
-        .upsert({
-          matric_number: matricId,
-          custom_password: newPass1.trim(),
-          updated_at: new Date().toISOString()
-        });
-
-      if (error) throw error;
-
-      // Commit update to live memory state safely
-      s.pass = newPass1.trim();
-      alert(`🔑 Password locked securely in cloud storage! Student account registration for Matric: ${matricId} will now use this updated authorization key persistently across all devices.`);
-      
-    } catch (err) {
-      console.error("Credentials Cloud Sync System Fault:", err);
-      alert("⚠️ Cloud Connection Drop: Failed to lock password into database repository. Please check internet connection values and retry.");
-    }
+    s.pass = newPass1.trim();
+    alert(`🔑 Password updated locally in device memory!`);
   }
 
-  // AUTHENTICATION LOGIC CONTROLLER
-  async function executeHubAuthentication() {
+  function executeHubAuthentication() {
     const userInput = document.getElementById('access-username').value.trim();
     const passInput = document.getElementById('access-password').value.trim();
     const errorLabel = document.getElementById('access-error-lbl');
     
     errorLabel.style.display = 'none';
 
-    // A. Supervisor Administrative Log-In Tunnel
     if (userInput === "enikuomehin@funaab.edu.ng" && passInput === "MASTER_PATHOLOGY_2026") {
       LOGGED_IN_USER = { name: "Prof. O. A. Enikuomehin", prefix: "supervisor" };
       AUDIT_TARGET_STUDENT = null; 
-      
       renderCohortSidebarDirectory(); 
       document.getElementById('hub-auth-gatekeeper').style.display = 'none'; 
       return;
     }
 
-    // Check if user exists in registration configurations directory dictionary array
     if (COHORT_REGISTRY[userInput]) {
       let targetPassword = COHORT_REGISTRY[userInput].pass;
 
-      try {
-        // 🔍 DATABASE LOOKUP: Scan table records for any modified custom user passwords
-        const { data, error } = await _supabase
-          .from('cohort_credential_sync')
-          .select('custom_password')
-          .eq('matric_number', userInput)
-          .maybeSingle();
-
-        if (!error && data && data.custom_password) {
-          // If a student modified their credentials previously, re-align token mapping values
-          targetPassword = data.custom_password;
-          COHORT_REGISTRY[userInput].pass = data.custom_password;
-        }
-      } catch (dbErr) {
-        console.warn("Non-fatal credential database verification lookup skip:", dbErr);
-      }
-
-      // B. Dynamic Persistent Workspace Authorization
       if (passInput === targetPassword) {
         LOGGED_IN_USER = COHORT_REGISTRY[userInput];
         AUDIT_TARGET_STUDENT = null; 
@@ -871,7 +806,6 @@ async function openPasswordCustomizationPanel(matricId) {
     errorLabel.style.display = 'block';
   }
 
-  // EXIT SESSION TERMINATION ACTUATOR
   function terminatePortalSession() {
     LOGGED_IN_USER = null;
     AUDIT_TARGET_STUDENT = null;
@@ -880,7 +814,6 @@ async function openPasswordCustomizationPanel(matricId) {
     
     renderAllWeeksHTML();
     bindInputListeners();
-    
     closeJosiahPortal();
     document.getElementById('hub-auth-gatekeeper').style.display = 'flex'; 
   } 
@@ -948,73 +881,28 @@ async function openPasswordCustomizationPanel(matricId) {
     window.scrollTo(0,0);
   }
 
-  // ================================================================= -->
-  // 🔄 RE-ENGINEERED UNIFIED DYNAMIC DATA SHEET GENERATOR
-  // ================================================================= -->
   function renderAllWeeksHTML() {
     const mountPoint = document.getElementById("dynamic-weeks-mount-wrapper");
     if (!mountPoint) return;
     
     let masterHTML = "";
-    
-    // Determine which active student account layer we are currently inspecting
     let activeUserContext = AUDIT_TARGET_STUDENT ? AUDIT_TARGET_STUDENT : LOGGED_IN_USER;
-    
-    // Safeguard fallback: Use standard plot counts if no session context exists yet
     let currentActivePlots = (activeUserContext && activeUserContext.plots && activeUserContext.plots.length > 0) 
       ? activeUserContext.plots 
       : ["111", "203", "309", "114", "202", "310", "112", "204", "306"]; 
 
-    // 🧠 INTERNAL DYNAMIC MAP ENGINE: Aligns Codes and Descriptions for All 12 Students
     let dynamicPlotMap = [
-      { 
-        id: currentActivePlots[0] || "111", rep: "I", type: "control", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[0] || "T1 Control") : "T1: Control (Rep I)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[0] || "Untreated Control Plot") : "Untreated reference standard block within Replication I canopy matrix array." 
-      },
-      { 
-        id: currentActivePlots[1] || "203", rep: "II", type: "control", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[1] || "T1 Control") : "T1: Control (Rep II)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[1] || "Untreated Control Plot") : "Central untreated reference standard block inside Replication II microclimate array." 
-      },
-      { 
-        id: currentActivePlots[2] || "309", rep: "III", type: "control", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[2] || "T1 Control") : "T1: Control (Rep III)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[2] || "Untreated Control Plot") : "Final untreated reference standard block position within Replication III array border." 
-      },
-      { 
-        id: currentActivePlots[3] || "114", rep: "I", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[3] || "Group II Target") : "T4: Treated Variant A (Rep I)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[3] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep I tracking validation block." 
-      },
-      { 
-        id: currentActivePlots[4] || "202", rep: "II", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[4] || "Group II Target") : "T4: Treated Variant A (Rep II)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[4] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep II tracking validation block." 
-      },
-      { 
-        id: currentActivePlots[5] || "310", rep: "III", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[5] || "Group II Target") : "T4: Treated Variant A (Rep III)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[5] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep III tracking validation block." 
-      },
-      { 
-        id: currentActivePlots[6] || "112", rep: "I", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[6] || "Group III Target") : "T5: Treated Variant B (Rep I)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[6] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep I monitoring limit block." 
-      },
-      { 
-        id: currentActivePlots[7] || "204", rep: "II", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[7] || "Group III Target") : "T5: Treated Variant B (Rep II)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[7] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep II monitoring limit block." 
-      },
-      { 
-        id: currentActivePlots[8] || "306", rep: "III", type: "treated", 
-        code: (activeUserContext && activeUserContext.plot_codes) ? (activeUserContext.plot_codes[8] || "Group III Target") : "T5: Treated Variant B (Rep III)", 
-        desc: (activeUserContext && activeUserContext.plot_descriptions) ? (activeUserContext.plot_descriptions[8] || "Assigned Treatment Plot") : "Treated block under assigned solution protocols. Rep III monitoring limit block." 
-      }
+      { id: currentActivePlots[0] || "111", rep: "I", type: "control", code: activeUserContext?.plot_codes?.[0] || "T1: Control (Rep I)", desc: activeUserContext?.plot_descriptions?.[0] || "Untreated baseline matrix." },
+      { id: currentActivePlots[1] || "203", rep: "II", type: "control", code: activeUserContext?.plot_codes?.[1] || "T1: Control (Rep II)", desc: activeUserContext?.plot_descriptions?.[1] || "Untreated baseline matrix." },
+      { id: currentActivePlots[2] || "309", rep: "III", type: "control", code: activeUserContext?.plot_codes?.[2] || "T1: Control (Rep III)", desc: activeUserContext?.plot_descriptions?.[2] || "Untreated baseline matrix." },
+      { id: currentActivePlots[3] || "114", rep: "I", type: "treated", code: activeUserContext?.plot_codes?.[3] || "T4: Variant A (Rep I)", desc: activeUserContext?.plot_descriptions?.[3] || "Assigned treatment setup." },
+      { id: currentActivePlots[4] || "202", rep: "II", type: "treated", code: activeUserContext?.plot_codes?.[4] || "T4: Variant A (Rep II)", desc: activeUserContext?.plot_descriptions?.[4] || "Assigned treatment setup." },
+      { id: currentActivePlots[5] || "310", rep: "III", type: "treated", code: activeUserContext?.plot_codes?.[5] || "T4: Variant A (Rep III)", desc: activeUserContext?.plot_descriptions?.[5] || "Assigned treatment setup." },
+      { id: currentActivePlots[6] || "112", rep: "I", type: "treated", code: activeUserContext?.plot_codes?.[6] || "T5: Variant B (Rep I)", desc: activeUserContext?.plot_descriptions?.[6] || "Assigned treatment setup." },
+      { id: currentActivePlots[7] || "204", rep: "II", type: "treated", code: activeUserContext?.plot_codes?.[7] || "T5: Variant B (Rep II)", desc: activeUserContext?.plot_descriptions?.[7] || "Assigned treatment setup." },
+      { id: currentActivePlots[8] || "306", rep: "III", type: "treated", code: activeUserContext?.plot_codes?.[8] || "T5: Variant B (Rep III)", desc: activeUserContext?.plot_descriptions?.[8] || "Assigned treatment setup." }
     ];
 
-    // Core loops for multi-week display views
     weeksConfig.forEach(week => {
       let isWeekActive = week.num === 1 ? "active" : "";
       masterHTML += `<div id="week-${week.num}-content" class="week-content ${isWeekActive}">`;
@@ -1022,8 +910,8 @@ async function openPasswordCustomizationPanel(matricId) {
       
       const groups = [
         { title: "Experimental Group I: Untreated Reference Baseline (T1)", plots: dynamicPlotMap.slice(0, 3) },
-        { title: (activeUserContext && activeUserContext.group2_title) ? activeUserContext.group2_title : "Experimental Group II: Active Investigation Focus", plots: dynamicPlotMap.slice(3, 6) },
-        { title: (activeUserContext && activeUserContext.group3_title) ? activeUserContext.group3_title : "Experimental Group III: Active Investigation Focus", plots: dynamicPlotMap.slice(6, 9) }
+        { title: activeUserContext?.group2_title || "Experimental Group II: Active Investigation", plots: dynamicPlotMap.slice(3, 6) },
+        { title: activeUserContext?.group3_title || "Experimental Group III: Active Investigation", plots: dynamicPlotMap.slice(6, 9) }
       ];
 
       groups.forEach(group => {
@@ -1103,11 +991,11 @@ async function openPasswordCustomizationPanel(matricId) {
               </div>
               <div class="notes-block">
                 <div class="notes-title">📝 Field Pathology Phenotype Notes</div>
-                <textarea data-key="${notesKey}" class="notes-textarea core-logger-input" placeholder="Describe micro-symptom variants, yellowing, tissue drops, or unexpected pathogen developments here..."></textarea>
+                <textarea data-key="${notesKey}" class="notes-textarea core-logger-input" placeholder="Describe micro-symptom variants..."></textarea>
               </div>
               <div class="comment-section">
                 <label>Supervisor Review & Validation Comments</label>
-                <textarea data-key="${reviewKey}" class="comment-textarea core-logger-input" placeholder="Awaiting academic feedback logging..."></textarea>
+                <textarea data-key="${reviewKey}" class="comment-textarea core-logger-input" placeholder="Awaiting feedback..."></textarea>
               </div>
             </div>
           `;
@@ -1122,19 +1010,16 @@ async function openPasswordCustomizationPanel(matricId) {
 
   function bindInputListeners() {
     document.querySelectorAll(".core-logger-input").forEach(element => {
-      // Clean up old listener attachments to prevent memory stacking
-      element.replaceWith(element.cloneNode(true));
-    });
-
-    document.querySelectorAll(".core-logger-input").forEach(element => {
-      element.addEventListener("input", async function() {
-        // Awaiting the function links the network sequence correctly to browser event loops
-        await saveValueToCache(this.getAttribute("data-key"), this.value);
+      element.addEventListener("input", function() {
+        saveValueToCache(this.getAttribute("data-key"), this.value);
       });
     });
   }
 
-  async function saveValueToCache(key, value) {
+  // ================================================================= -->
+  // ⚡ UPDATED: PURE LOCALSTORAGE REPOSITORY (NO EXTERNAL SYNC CALLS)
+  // ================================================================= -->
+  function saveValueToCache(key, value) {
     let database = JSON.parse(localStorage.getItem("castor_logger_data")) || {};
     let activeContext = AUDIT_TARGET_STUDENT ? AUDIT_TARGET_STUDENT : LOGGED_IN_USER;
     let userPrefix = activeContext ? activeContext.prefix : "anonymous_";
@@ -1143,38 +1028,120 @@ async function openPasswordCustomizationPanel(matricId) {
     
     database[isolatedKey] = value;
     localStorage.setItem("castor_logger_data", JSON.stringify(database));
+    console.log(`Saved locally: ${isolatedKey}`);
+  }
 
-    // 🔒 BACK UP DIGITS TO THE CLOUD INSTANTLY ON TYPING
-    if (LOGGED_IN_USER) {
-      try {
-        let usernameEl = document.getElementById('access-username');
-        let userMatric = usernameEl ? usernameEl.value.trim() : "";
-        
-        // Safeguard fallback: if viewing in supervisor/explorer mode and input is blank, assign context matric
-        if (!userMatric && AUDIT_TARGET_STUDENT) {
-          userMatric = Object.keys(COHORT_REGISTRY).find(k => COHORT_REGISTRY[k].prefix === userPrefix) || "audit_view";
-        }
+  function loadSavedValuesToDOM() {
+    const database = JSON.parse(localStorage.getItem("castor_logger_data"));
+    let isSupervisorMode = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "supervisor");
+    let activeContext = AUDIT_TARGET_STUDENT ? AUDIT_TARGET_STUDENT : LOGGED_IN_USER;
+    let userPrefix = activeContext ? activeContext.prefix : "anonymous_";
+    let isJosiah = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "josiah_");
 
-        // Fixed: Explicitly passing matching constraints forces Supabase to overwrite the existing payload cleanly
-        const { error } = await _supabase.from('cohort_field_sync').upsert(
-          { 
-            prefix_id: userPrefix, 
-            matric_number: userMatric || "system_log", 
-            full_payload: database,
-            updated_at: new Date().toISOString()
-          },
-          { onConflict: 'prefix_id' }
-        );
-
-        if (error) {
-          console.error("❌ Supabase Rejected: ", error.message);
-        } else {
-          console.log("✅ Cloud Sync Success: ", userPrefix);
-        }
-      } catch (cloudErr) {
-        console.error("🚨 Network Pipeline Broken: ", cloudErr);
+    document.querySelectorAll(".core-logger-input").forEach(element => {
+      const key = element.getAttribute("data-key");
+      let isolatedKey = key.startsWith(userPrefix) ? key : userPrefix + key;
+      
+      if (database && database[isolatedKey] !== undefined) {
+        element.value = database[isolatedKey];
+      } else {
+        element.value = "";
       }
-    }
+
+      if (isSupervisorMode) {
+        if (!element.classList.contains("comment-textarea")) {
+          element.disabled = true;
+          element.style.backgroundColor = "#f4f1e6";
+          element.style.cursor = "not-allowed";
+        } else {
+          element.disabled = false;
+          element.style.backgroundColor = "#fff";
+          element.placeholder = "Type validation remarks here...";
+          element.oninput = function() {
+            saveValueToCache(this.getAttribute("data-key"), this.value);
+          };
+        }
+      } 
+      else if (isJosiah) {
+        if (AUDIT_TARGET_STUDENT && AUDIT_TARGET_STUDENT.prefix !== "josiah_") {
+          element.disabled = true;
+          element.style.backgroundColor = "#f4f1e6";
+          element.style.cursor = "not-allowed";
+        } else {
+          if (element.classList.contains("comment-textarea")) {
+            element.disabled = true;
+            element.style.backgroundColor = "#f4f1e6";
+          } else {
+            element.disabled = false;
+            element.style.backgroundColor = "#fff";
+          }
+        }
+      } 
+      else {
+        if (element.classList.contains("comment-textarea")) {
+          element.disabled = true;
+        } else {
+          element.disabled = false;
+          element.style.backgroundColor = "#fff";
+        }
+      }
+    });
+
+    let currentActivePlots = (activeContext && activeContext.plots) ? activeContext.plots : ["111", "203", "309", "114", "202", "310", "112", "204", "306"];
+    
+    currentActivePlots.forEach(plotId => {
+      for(let w=1; w<=6; w++) {
+        for(let p=1; p<=3; p++) {
+          let prefix = `w${w}_${plotId}_p${p}`;
+          ['imgA', 'imgB'].forEach(slot => {
+            let storageKey = `${userPrefix}${prefix}_${slot}_src`;
+            let container = document.getElementById(`box_${prefix}_${slot}`);
+            if (container) {
+              if (database && database[storageKey]) {
+                container.innerHTML = `<img src="${database[storageKey]}" alt="Snapshot"><div class="view-overlay-indicator">🔍 View</div>`;
+              } else {
+                container.innerHTML = "📷";
+              }
+              container.style.pointerEvents = "auto";
+            }
+          });
+        }
+      }
+    });
+  }
+
+  function handleImageCellClick(storageKeyPrefix) {
+    activePrefixKeyContext = storageKeyPrefix; 
+    const database = JSON.parse(localStorage.getItem("castor_logger_data")) || {};
+    let isSupervisorMode = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "supervisor");
+    
+    let activeContext = AUDIT_TARGET_STUDENT ? AUDIT_TARGET_STUDENT : LOGGED_IN_USER;
+    let userPrefix = activeContext ? activeContext.prefix : "anonymous_";
+    const hasExistingImage = !!database[`${userPrefix}${storageKeyPrefix}_src`];
+    
+    document.getElementById("action-dialog-subtitle").innerText = `Target Slot: ${storageKeyPrefix.toUpperCase().replace(/_/g, " ")}`;
+    
+    const viewButton = document.getElementById("modal-btn-view");
+    if (viewButton) viewButton.disabled = !hasExistingImage;
+
+    let isJosiah = (LOGGED_IN_USER && LOGGED_IN_USER.prefix === "josiah_");
+    let isViewingSomeoneElse = (AUDIT_TARGET_STUDENT && AUDIT_TARGET_STUDENT.prefix !== LOGGED_IN_USER.prefix);
+    
+    const actionButtons = document.querySelectorAll(".field-dialog-overlay button:not(#modal-btn-view):not(.cancel)");
+    
+    actionButtons.forEach(btn => {
+      if (isSupervisorMode || (isJosiah && isViewingSomeoneElse)) {
+        btn.disabled = true;
+        btn.style.opacity = "0.4";
+        btn.style.cursor = "not-allowed";
+      } else {
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.cursor = "pointer";
+      }
+    });
+
+    document.getElementById("action-dialog-overlay").style.display = "flex";
   }
 
   function executeDialogAction(actionRoute) {
@@ -1208,70 +1175,14 @@ async function openPasswordCustomizationPanel(matricId) {
     let userPrefix = activeContext ? activeContext.prefix : "anonymous_";
     
     if (targetBox) {
-      targetBox.innerHTML = `<span style="font-size:9px; font-weight:bold; color:var(--blue);">⏳ COMPRESSING...</span>`;
+      targetBox.innerHTML = `<span style="font-size:9px; font-weight:bold; color:var(--blue);">⏳ LOCAL PROCESSING...</span>`;
     }
 
-    const compressImageFile = (sourceFile) => {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(sourceFile);
-        reader.onload = (event) => {
-          const img = new Image();
-          img.src = event.target.result;
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            let width = img.width;
-            let height = img.height;
-
-            const max_size = 1000;
-            if (width > height && width > max_size) {
-              height *= max_size / width;
-              width = max_size;
-            } else if (height > max_size) {
-              width *= max_size / height;
-              height = max_size;
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, width, height);
-
-            canvas.toBlob((blob) => {
-              resolve(blob);
-            }, "image/jpeg", 0.7);
-          };
-        };
-      });
-    };
-
-    const optimizedImageBlob = await compressImageFile(file);
-    
-    if (targetBox) {
-      targetBox.innerHTML = `<span style="font-size:9px; font-weight:bold; color:var(--green);">📡 CLOUD SYNC...</span>`;
-    }
-
-    try {
-      const uniqueFileName = `${userPrefix}${storageKeyPrefix}.jpg`;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(event) {
+      const permanentCloudUrl = event.target.result; // Fallback directly to base64 string for offline storage preview
       
-      const { data, error } = await _supabase
-        .storage
-        .from('castor_photos')
-        .upload(uniqueFileName, optimizedImageBlob, {
-          contentType: 'image/jpeg',
-          upsert: true
-        });
-
-      if (error) throw error;
-
-      const { data: publicUrlData } = _supabase
-        .storage
-        .from('castor_photos')
-        .getPublicUrl(uniqueFileName);
-
-      const permanentCloudUrl = publicUrlData.publicUrl;
-      console.log("Supabase Permanent Link Locked In:", permanentCloudUrl);
-
       if (targetBox) {
         targetBox.innerHTML = `<img src="${permanentCloudUrl}" alt="Evidence"><div class="view-overlay-indicator">🔍 View</div>`;
       }
@@ -1281,22 +1192,7 @@ async function openPasswordCustomizationPanel(matricId) {
       
       database[isolatedKey] = permanentCloudUrl;
       localStorage.setItem("castor_logger_data", JSON.stringify(database));
-      
-      if (LOGGED_IN_USER) {
-        let userMatric = document.getElementById('access-username').value.trim();
-        await _supabase.from('cohort_field_sync').upsert({ 
-          prefix_id: userPrefix, 
-          matric_number: userMatric, 
-          full_payload: database,
-          updated_at: new Date().toISOString()
-        });
-      }
-      
-    } catch (error) {
-      console.error("Supabase Storage Pipeline Fault:", error);
-      alert("Cloud storage connection drop. Make sure your policies match.");
-      if (targetBox) targetBox.innerHTML = "📷";
-    }
+    };
   }
 
   function displayPhotoOverlay(imageURL, captionText) {
@@ -1319,6 +1215,5 @@ async function openPasswordCustomizationPanel(matricId) {
 
   window.onload = initializeMatrixDatabase;
 </script>
-
 </body>
 </html>
