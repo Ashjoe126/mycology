@@ -1,1 +1,1 @@
-# Pawsology-store
+# Pathology
