@@ -263,10 +263,15 @@
 </div>
 
 <div id="photo-lightbox-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 999999; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
-  <div style="position: relative; max-width: 90%; max-height: 90%; text-align: center;">
+  <div style="position: relative; max-width: 90%; max-height: 90%; text-align: center; display: flex; flex-direction: column; align-items: center;">
     <span onclick="closePhotoOverlay()" style="position: absolute; top: -45px; right: 0; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
-    <img id="lightbox-target-image" src="" alt="Field Evidence" style="max-width: 100%; max-height: 80vh; border: 2px solid white; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+    <img id="lightbox-target-image" src="" alt="Field Evidence" style="max-width: 100%; max-height: 70vh; border: 2px solid white; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
     <div id="lightbox-caption" style="color: #fff; font-size: 13px; margin-top: 12px; font-style: italic; font-family: 'Inter', sans-serif;"></div>
+    
+    <!-- 💾 DOWNLOAD BUTTON -->
+    <button onclick="downloadActiveLightboxImage()" style="background: var(--green); color: white; border: none; padding: 10px 18px; border-radius: 5px; font-size: 12px; font-weight: bold; margin-top: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+      📥 Save Photo to Device Gallery
+    </button>
   </div>
 </div>
 
@@ -1462,6 +1467,57 @@ async function openPasswordCustomizationPanel(matricId) {
 
   function closePhotoOverlay() {
     document.getElementById('photo-lightbox-overlay').style.display = 'none';
+  }
+  async function downloadActiveLightboxImage() {
+    const imgElement = document.getElementById('lightbox-target-image');
+    const captionElement = document.getElementById('lightbox-caption');
+    
+    if (!imgElement || !imgElement.src) {
+      alert("No image source found to download.");
+      return;
+    }
+
+    try {
+      // 1. Fetch the image data directly from your Supabase link as a blob
+      const response = await fetch(imgElement.src);
+      const fileBlob = await response.blob();
+      
+      // 2. Create a temporary, secure offline download link in the browser memory
+      const blobStorageURL = URL.createObjectURL(fileBlob);
+      const temporaryLink = document.createElement('a');
+      temporaryLink.href = blobStorageURL;
+      
+      // 3. 🏷️ THE NAME FIX: Read the exact text caption from the screen
+      let rawCaption = captionElement ? captionElement.innerText : 'pathology_specimen';
+      
+      // Clean up the text: replace spaces, slashes, or special characters with clean underscores
+      let cleanFileName = rawCaption
+        .trim()
+        .toLowerCase()
+        .replace(/[\s\-\/\:\(\)\|\,\.\🌱\🔍\📸]+/g, '_') // Turn spaces and emojis into underscores
+        .replace(/^_+|_+$/g, '');                      // Trim any double underscores from edges
+        
+      // Fallback if the caption text is somehow empty
+      if (!cleanFileName) {
+        cleanFileName = 'field_pathology_evidence';
+      }
+      
+      // Set the final format: e.g., week_1_plot_241_plant_1_blight_leaf_count.jpg
+      temporaryLink.download = `${cleanFileName}.jpg`;
+      
+      // 4. Secretly trigger the download to save it straight to phone gallery / downloads folder
+      document.body.appendChild(temporaryLink);
+      temporaryLink.click();
+      
+      // 5. Instantly clean up the browser memory tracks
+      document.body.removeChild(temporaryLink);
+      URL.revokeObjectURL(blobStorageURL);
+      
+    } catch (downloadError) {
+      console.error("Gallery Save Pipeline Fault:", downloadError);
+      // Fallback method if browser network configurations block direct blob extraction
+      window.open(imgElement.src, '_blank');
+    }
   }
 
   function changeWeekView(weekNumber) {
