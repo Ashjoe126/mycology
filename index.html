@@ -195,7 +195,13 @@
       </div>
 
       <div class="hub-card">
-        <h3>👥 2026/2027 Research Cohort (12 Students)</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--blue); padding-bottom: 5px; margin-bottom: 12px;">
+          <h3 style="margin: 0; border: none; padding: 0;">👥 2026/2027 Research Cohort (12 Students)</h3>
+          <!-- 📥 EXCEL EXPORT FOR ALL 12 STUDENTS -->
+          <button id="btn-export-all-cohort" type="button" onclick="exportAllCohortDataToCSV()" style="background: #1a5c2a; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: 'Inter', sans-serif;">
+            📥 Download All Students (Excel)
+          </button>
+        </div>
         <!-- Dynamic Target List Component Container -->
         <ul class="student-list" id="sidebar-cohort-list-mount">
           <!-- Populated securely via JavaScript dynamic engine -->
@@ -224,6 +230,9 @@
   <span><strong>Project Supervisor:</strong> Prof. O. A. Enikuomehin</span>
   <span style="display: flex; flex-direction: column; align-items: flex-end;">
     <span><strong>Field Researcher:</strong> <span id="dynamic-user-name-display">O. E. Josiah (Matric No: 20224193)</span></span>
+    <span style="font-size: 10px; max-width: 480px; text-align: right; color: #eef4fb; margin-top: 2px;">
+      <strong>Project Topic:</strong> <span id="dynamic-user-topic-display">Effect of foliar fertilizer applications...</span>
+    </span>
     
     <!-- 🔑 UNIVERSAL PASSWORD BUTTON -->
 <button onclick="openPasswordCustomizationPanel(LOGGED_IN_USER.prefix === 'supervisor' ? 'supervisor' : Object.keys(COHORT_REGISTRY).find(k => COHORT_REGISTRY[k].prefix === LOGGED_IN_USER.prefix))" style="background: var(--blue); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; text-transform: uppercase; margin-top: 5px;">
@@ -238,11 +247,14 @@
         <span class="sync-dot"></span>
         <span>Mobi-Persistence Engine Active (Local Autosave Enabled)</span>
       </div>
-      <div>
-        <button onclick="terminatePortalSession()" style="background: #a32a2a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-transform: uppercase;">Exit Session 🔒</button>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <!-- 📥 EXAMINER-READY EXCEL EXPORT FOR ACTIVE STUDENT -->
+        <button type="button" onclick="exportActiveStudentDataToCSV()" style="background: #1a5c2a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+          📥 Export Presentation-Ready Excel
+        </button>
+        <button type="button" onclick="terminatePortalSession()" style="background: #a32a2a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: bold; text-transform: uppercase;">Exit Session 🔒</button>
       </div>
     </div>
-
     <div class="week-nav">
       <button id="nav-w1" class="week-btn active" onclick="changeWeekView(1)">Week 1 (July 14)</button>
       <button id="nav-w2" class="week-btn" onclick="changeWeekView(2)">Week 2 (July 21)</button>
@@ -334,6 +346,7 @@
   const COHORT_REGISTRY = {
     "20224193": { 
       name: "O. E. Josiah", 
+      topic: "Effect of foliar fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS.AC-20)",
       pass: "josiah114", 
       prefix: "josiah_", 
       treatments: "Mycology (V3: T1, T4, T5)",
@@ -362,6 +375,7 @@
     },
     "20224209": { 
       name: "E. A. Ojetayo", 
+      topic: "Effect of organic fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS 2)",
       pass: "ezekiel109", 
       prefix: "ezekiel_", 
       treatments: "Mycology (V2: T1, T2, T3)",
@@ -390,6 +404,7 @@
     },
     "20224152": { 
       name: "S. O. Akinsowon", 
+      topic: "Comparative effect of organic and foliar fertilizers on incidence and severity of foliar diseases of castor (Var. NCRICAS 1)",
       pass: "success105", 
       prefix: "success_", 
       treatments: "Mycology (V1: T1, T2, T4)",
@@ -418,6 +433,7 @@
     },
     "20224158": { 
       name: "J. Odogwu", 
+      topic: "Comparative effect of organic and foliar fertilizers on incidence and severity of foliar diseases of castor (Var. NCRICAS 2)",
       pass: "jerry107", 
       prefix: "jerry_", 
       treatments: "Mycology (V2: T1, T3, T5)",
@@ -446,6 +462,7 @@
     },
     "20224182": { 
       name: "E. M. Ikechukwu", 
+      topic: "Effect of foliar fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS 2)",
       pass: "esther108", 
       prefix: "esther_", 
       treatments: "Mycology (V2: T1, T4, T5)",
@@ -474,6 +491,7 @@
     },
     "20224183": { 
       name: "A. A. Ikuyajesin", 
+      topic: "Effect of foliar fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS 1)",
       pass: "malik103", 
       prefix: "malik_", 
       treatments: "Mycology (V1: T1, T4, T5)",
@@ -500,8 +518,9 @@
       session: "2026/2027 Academic Session", supervisor: "Prof O.A. Enikuomehin", passport_url: "https://via.placeholder.com/120x140?text=Passport",
       nickname: "[Nickname]", email: "ikuyajesin.a@student.funaab.edu.ng", phone: "[Pending]", hobby: "[Pending]", address: "[Pending]", state_of_origin: "[Pending]", lga: "[Pending]", date_created: "July 19, 2026"
     },
-    "20224219": { 
+    "20204219": { 
       name: "O. V. Olatunbosun", 
+      topic: "Effect of organic fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS 1)",
       pass: "gbotemi105", 
       prefix: "gbotemi_", 
       treatments: "Mycology (V1: T1, T2, T3)",
@@ -530,6 +549,7 @@
     },
     "20224220": { 
       name: "M. A. Oleribenma", 
+      topic: "Effect of organic fertilizer applications on the incidence and severity of foliar diseases of castor (Var NCRICAS.AC-20)",
       pass: "marvelous113", 
       prefix: "marvelous_", 
       treatments: "Mycology (V3: T1, T2, T3)",
@@ -558,6 +578,7 @@
     },
     "20224231": { 
       name: "I. O. Oyedele", 
+      topic: "Comparative effect of organic and foliar fertilizers on incidence and severity of foliar diseases of castor (Var. NCRICAS.AC-20)",
       pass: "ibrahim113", 
       prefix: "ibrahim_", 
       treatments: "Mycology (V3: T1, T2, T4)",
@@ -586,6 +607,7 @@
     },
     "20224192": { 
       name: "L. Joseph", 
+      topic: "Comparative effect of organic and foliar fertilizers on incidence and severity of foliar diseases of castor (Var. NCRICAS 1)",
       pass: "louis192", 
       prefix: "louis_", 
       treatments: "Mycology (V1: T1, T4, T5)",
@@ -623,6 +645,7 @@
     }, 
     "20224196": { 
       name: "O. G. Martin", 
+      topic: "Vertebrate Pest Damage and Control Strategies in Arable Field Plots",
       pass: "goodness196", 
       prefix: "goodness_", 
       treatments: "Vertebrate Pests Section",
@@ -651,6 +674,7 @@
     },
     "20224189": { 
       name: "O. Jayeoba", 
+      topic: "Vertebrate Pest Dynamics and Protective Barrier Evaluation in Castor Plots",
       pass: "posi189", 
       prefix: "posi_", 
       treatments: "Vertebrate Pests Section",
@@ -751,6 +775,8 @@
           } else {
             document.getElementById('dynamic-user-name-display').innerText = `${studentData.name} (Matric: ${matricId}) [SUPERVISOR AUDIT VIEW]`;
           }
+          const topicDisplay = document.getElementById('dynamic-user-topic-display');
+          if (topicDisplay) topicDisplay.innerText = studentData.topic || "Research Project Topic Pending";
 
           // 🪐 BRIDGE ADDITION: Fetch records from the database table when audit targets change
           try {
@@ -810,6 +836,7 @@
           <table class="profile-table">
             <tr><td class="label-col">Full Name:</td><td>${s.name}</td></tr>
             <tr><td class="label-col">Matric No:</td><td>${matricId}</td></tr>
+            <tr><td class="label-col">Approved Topic:</td><td style="font-weight:600; color:#0d3b6e;">${s.topic || '[Topic Pending Official Assignment]'}</td></tr>
             <tr><td class="label-col">Nickname:</td><td>${s.nickname || '[Click Edit next week]'}</td></tr>
             <tr><td class="label-col">Email Address:</td><td>${s.email || '[Click Edit next week]'}</td></tr>
             <tr><td class="label-col">Phone Number:</td><td>${s.phone || '[Click Edit next week]'}</td></tr>
@@ -928,6 +955,8 @@ async function openPasswordCustomizationPanel(matricId) {
           AUDIT_TARGET_STUDENT = null; 
           
           document.getElementById('dynamic-user-name-display').innerText = `${LOGGED_IN_USER.name} (Matric: ${userInput})`;
+          const topicDisplay = document.getElementById('dynamic-user-topic-display');
+          if (topicDisplay) topicDisplay.innerText = LOGGED_IN_USER.topic || "Research Project Topic Pending";
 
           // Fetch dynamic data payload backup from Supabase
           try {
@@ -1682,7 +1711,282 @@ function runAIGenerationMode(mode) {
       window.open(imgElement.src, '_blank');
     }
   }
+// ================================================================= -->
+  // 🎓 ACADEMIC PRESENTATION EXPORT ENGINE (EXAMINER-READY FORMAT)
+  // ================================================================= -->
 
+  function triggerCSVDownload(csvString, fileName) {
+    const blob = new Blob(["\uFEFF" + csvString], { type: "text/csv;charset=utf-8;" });
+    const downloadUrl = URL.createObjectURL(blob);
+    const tempLink = document.createElement("a");
+    tempLink.href = downloadUrl;
+    tempLink.setAttribute("download", fileName);
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+    URL.revokeObjectURL(downloadUrl);
+  }
+
+ // ================================================================= -->
+  // 🎓 CLEAN PRESENTATION EXPORT WITH AUTO-CALCULATED LSD (P <= 0.05)
+  // ================================================================= -->
+
+  async function exportActiveStudentDataToCSV() {
+    let activeUser = AUDIT_TARGET_STUDENT ? AUDIT_TARGET_STUDENT : LOGGED_IN_USER;
+    if (!activeUser) {
+      alert("Please log in or select a student first.");
+      return;
+    }
+
+    let matricId = Object.keys(COHORT_REGISTRY).find(k => COHORT_REGISTRY[k].prefix === activeUser.prefix) || "20224193";
+    let userPrefix = activeUser.prefix;
+    let studentName = activeUser.name;
+    let plots = activeUser.plots && activeUser.plots.length > 0 
+      ? activeUser.plots 
+      : ["111", "203", "309", "114", "202", "310", "112", "204", "306"];
+
+    let payload = null;
+    try {
+      const { data, error } = await _supabase
+        .from('cohort_field_sync')
+        .select('full_payload')
+        .eq('matric_number', matricId)
+        .maybeSingle();
+      if (!error && data && data.full_payload) {
+        payload = data.full_payload;
+      }
+    } catch(e) { console.warn("Using offline cache:", e); }
+    
+    if (!payload) {
+      payload = JSON.parse(localStorage.getItem("castor_logger_data")) || {};
+    }
+
+    let csv = [];
+
+    // Header Meta
+    csv.push(`"DEPARTMENT OF CROP PROTECTION, COLPLANT, FUNAAB"`);
+    csv.push(`"RESEARCH PROJECT PRESENTATION DATA (6-WEEK EVALUATION)"`);
+    csv.push(`"Candidate: ${studentName} | Matric No: ${matricId} | Supervisor: Prof. O. A. Enikuomehin"`);
+    csv.push(`"Topic: ${activeUser.topic || 'Approved Research Project Title'} | Design: RCBD (3 Reps)"`);
+    csv.push("");
+
+    // Treatment Definitions (3 Replicates per treatment)
+    const trtGroups = [
+      { name: "T1: Untreated Control", indices: [0, 1, 2] },
+      { name: "T4: Foliar Fertilizer (2X)", indices: [3, 4, 5] },
+      { name: "T5: Foliar Fertilizer (3X)", indices: [6, 7, 8] }
+    ];
+
+    // Helper: Calculate RCBD ANOVA Mean Square Error & LSD (P <= 0.05)
+    // t = 3, r = 3, Error df = (3-1)*(3-1) = 4, t_crit(0.05, 4) = 2.7764
+    function calculateRCBD_LSD(matrix3x3) {
+      let r = 3, t = 3;
+      let grandTotal = 0;
+      let allValues = [];
+      let trtTotals = [0, 0, 0];
+      let repTotals = [0, 0, 0];
+
+      for (let i = 0; i < t; i++) {
+        for (let j = 0; j < r; j++) {
+          let val = matrix3x3[i][j];
+          allValues.push(val);
+          grandTotal += val;
+          trtTotals[i] += val;
+          repTotals[j] += val;
+        }
+      }
+
+      let grandMean = grandTotal / (t * r);
+      let ssTotal = allValues.reduce((acc, v) => acc + Math.pow(v - grandMean, 2), 0);
+      let ssTrt = trtTotals.reduce((acc, tot) => acc + (Math.pow(tot, 2) / r), 0) - (Math.pow(grandTotal, 2) / (t * r));
+      let ssRep = repTotals.reduce((acc, tot) => acc + (Math.pow(tot, 2) / t), 0) - (Math.pow(grandTotal, 2) / (t * r));
+
+      let ssError = ssTotal - ssTrt - ssRep;
+      let errorDf = (t - 1) * (r - 1); // 4
+      let mse = errorDf > 0 ? (ssError / errorDf) : 0;
+
+      if (mse <= 0.0001) return "—"; // No significant variation or 100% flat
+      let tCrit = 2.7764; // Two-tailed t-distribution critical value for df = 4 at alpha = 0.05
+      let lsd = tCrit * Math.sqrt((2 * mse) / r);
+      return lsd.toFixed(1);
+    }
+
+    // --- TABLE 1: DISEASE INCIDENCE (%) ---
+    csv.push(`"TABLE 1: EFFECT OF FOLIAR FERTILIZER ON DISEASE INCIDENCE (%) OF CASTOR"`);
+    let incHeader = ["Treatment"];
+    weeksConfig.forEach(w => incHeader.push(`"Week ${w.num} (${w.date.split(',')[0]})"`));
+    csv.push(incHeader.join(","));
+
+    let weeklyIncidenceMatrices = weeksConfig.map(() => [[0,0,0], [0,0,0], [0,0,0]]);
+
+    trtGroups.forEach((tg, tIdx) => {
+      let row = [`"${tg.name}"`];
+      weeksConfig.forEach((w, wIdx) => {
+        let repPlotIncidences = [];
+        tg.indices.forEach((idx, repIdx) => {
+          let pId = plots[idx];
+          let totalStands = 0;
+          let infectedStands = 0;
+          [1, 2, 3].forEach(pNum => {
+            let pre = `${userPrefix}w${w.num}_${pId}_p${pNum}`;
+            let blc = parseFloat(payload[`${pre}_blc`]) || 0;
+            let slc = parseFloat(payload[`${pre}_slc`]) || 0;
+            totalStands++;
+            if (blc > 0 || slc > 0) infectedStands++;
+          });
+          let plotInc = totalStands > 0 ? (infectedStands / totalStands) * 100 : 0;
+          weeklyIncidenceMatrices[wIdx][tIdx][repIdx] = plotInc;
+          repPlotIncidences.push(plotInc);
+        });
+        let meanInc = repPlotIncidences.reduce((a, b) => a + b, 0) / repPlotIncidences.length;
+        row.push(meanInc.toFixed(1));
+      });
+      csv.push(row.join(","));
+    });
+
+    // Auto-Append LSD Row for Incidence Table
+    let lsdIncRow = [`"LSD (P <= 0.05)"`];
+    weeksConfig.forEach((w, wIdx) => {
+      let lsdVal = calculateRCBD_LSD(weeklyIncidenceMatrices[wIdx]);
+      lsdIncRow.push(lsdVal);
+    });
+    csv.push(lsdIncRow.join(","));
+
+    csv.push("");
+    csv.push("");
+
+    // --- TABLE 2: DISEASE SEVERITY (%) ---
+    csv.push(`"TABLE 2: EFFECT OF FOLIAR FERTILIZER ON DISEASE SEVERITY (%) OF CASTOR"`);
+    let sevHeader = ["Treatment"];
+    weeksConfig.forEach(w => sevHeader.push(`"Week ${w.num} (${w.date.split(',')[0]})"`));
+    csv.push(sevHeader.join(","));
+
+    let weeklySeverityMatrices = weeksConfig.map(() => [[0,0,0], [0,0,0], [0,0,0]]);
+
+    trtGroups.forEach((tg, tIdx) => {
+      let row = [`"${tg.name}"`];
+      weeksConfig.forEach((w, wIdx) => {
+        let repPlotSeverities = [];
+        tg.indices.forEach((idx, repIdx) => {
+          let pId = plots[idx];
+          let standSeverities = [];
+          [1, 2, 3].forEach(pNum => {
+            let pre = `${userPrefix}w${w.num}_${pId}_p${pNum}`;
+            let ctl = parseFloat(payload[`${pre}_ctl`]) || 0;
+            let blc = parseFloat(payload[`${pre}_blc`]) || 0;
+            let slc = parseFloat(payload[`${pre}_slc`]) || 0;
+            let infectedLeaves = Math.max(blc, slc);
+            let s = ctl > 0 ? (infectedLeaves / ctl) * 100 : 0;
+            standSeverities.push(s);
+          });
+          let plotMeanSev = standSeverities.reduce((a, b) => a + b, 0) / (standSeverities.length || 1);
+          weeklySeverityMatrices[wIdx][tIdx][repIdx] = plotMeanSev;
+          repPlotSeverities.push(plotMeanSev);
+        });
+        let meanSev = repPlotSeverities.reduce((a, b) => a + b, 0) / (repPlotSeverities.length || 1);
+        row.push(meanSev.toFixed(1));
+      });
+      csv.push(row.join(","));
+    });
+
+    // Auto-Append LSD Row for Severity Table
+    let lsdSevRow = [`"LSD (P <= 0.05)"`];
+    weeksConfig.forEach((w, wIdx) => {
+      let lsdVal = calculateRCBD_LSD(weeklySeverityMatrices[wIdx]);
+      lsdSevRow.push(lsdVal);
+    });
+    csv.push(lsdSevRow.join(","));
+
+    let safeName = studentName.replace(/[\s\.\-]+/g, "_");
+    triggerCSVDownload(csv.join("\r\n"), `${safeName}_${matricId}_Presentation_Tables.csv`);
+  }
+
+  // EXPORT ALL 12 STUDENTS IN PRESENTATION FORMAT
+  async function exportAllCohortDataToCSV() {
+    const exportBtn = document.getElementById("btn-export-all-cohort");
+    if (exportBtn) exportBtn.innerText = "⏳ Generating Master File...";
+
+    let allSyncRecords = {};
+    try {
+      const { data, error } = await _supabase
+        .from('cohort_field_sync')
+        .select('matric_number, full_payload');
+      if (!error && data) {
+        data.forEach(item => {
+          allSyncRecords[item.matric_number] = item.full_payload;
+        });
+      }
+    } catch(err) {
+      console.warn("Using offline records for cohort export:", err);
+    }
+
+    let csv = [];
+    csv.push(`"COLPLANT PATHOLOGY & VERTEBRATE RESEARCH COHORT (2026/2027)"`);
+    csv.push(`"MASTER CONSOLIDATED FIELD RESEARCH DATA COMPILATION"`);
+    csv.push(`"Supervised by: Prof. O. A. Enikuomehin | Department of Crop Protection, FUNAAB"`);
+    csv.push("");
+
+    const masterHeaders = [
+      "Student_Name", "Matric_No", "Research_Topic_Scope", "Week", "Date", 
+      "Treatment_Group", "Replication", "Plot_ID", "Stand", 
+      "Total_Leaves", "Blight_Leaves", "Spot_Leaves", 
+      "Lesion_L_cm", "Lesion_B_cm", "Spot_Tally", "Infected_Status", "Severity_Score_Pct"
+    ];
+    csv.push(masterHeaders.join(","));
+
+    let fallbackLocal = JSON.parse(localStorage.getItem("castor_logger_data")) || {};
+
+    Object.keys(COHORT_REGISTRY).forEach(matricId => {
+      const student = COHORT_REGISTRY[matricId];
+      const payload = allSyncRecords[matricId] || fallbackLocal;
+      const userPrefix = student.prefix;
+      const plots = student.plots && student.plots.length > 0 ? student.plots : [];
+
+      weeksConfig.forEach(w => {
+        plots.forEach((plotId, pIdx) => {
+          let rep = pIdx < 3 ? "Rep I" : (pIdx < 6 ? "Rep II" : "Rep III");
+          let trtCode = student.plot_codes ? (student.plot_codes[pIdx] || "") : `Treatment ${pIdx+1}`;
+
+          [1, 2, 3].forEach(pNum => {
+            let pre = `${userPrefix}w${w.num}_${plotId}_p${pNum}`;
+            let ctl = parseFloat(payload[`${pre}_ctl`]) || 0;
+            let blc = parseFloat(payload[`${pre}_blc`]) || 0;
+            let slc = parseFloat(payload[`${pre}_slc`]) || 0;
+            let bll = payload[`${pre}_bll`] ?? "0.0";
+            let blb = payload[`${pre}_blb`] ?? "0.0";
+            let sqc = payload[`${pre}_sqc`] ?? "0";
+
+            let hasDisease = (blc > 0 || slc > 0) ? "Infected" : "Healthy";
+            let plantSev = ctl > 0 ? (((Math.max(blc, slc)) / ctl) * 100).toFixed(1) : "0.0";
+
+            let row = [
+              `"${student.name}"`,
+              `"${matricId}"`,
+              `"${student.treatments}"`,
+              `"Week ${w.num}"`,
+              `"${w.date}"`,
+              `"${trtCode}"`,
+              `"${rep}"`,
+              `"${plotId}"`,
+              `"Stand ${pNum}"`,
+              ctl,
+              blc,
+              slc,
+              bll,
+              blb,
+              sqc,
+              `"${hasDisease}"`,
+              `${plantSev}%`
+            ];
+            csv.push(row.join(","));
+          });
+        });
+      });
+    });
+
+    if (exportBtn) exportBtn.innerText = "📥 Download All Students (Excel)";
+    triggerCSVDownload(csv.join("\r\n"), "COLPLANT_2026_Cohort_Field_Data_Master.csv");
+  }
   function changeWeekView(weekNumber) {
     document.querySelectorAll('.week-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.week-content').forEach(content => content.classList.remove('active'));
